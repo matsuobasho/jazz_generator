@@ -24,7 +24,7 @@ def train_network():
 
     model = create_network(network_input, n_vocab)
 
-    train(model, network_input, network_output)
+    train(model, network_input, network_output, epochs)
 
 def get_notes():
     """ Get all the notes and chords from the midi files in the ./midi_songs directory """
@@ -108,7 +108,7 @@ def create_network(network_input, n_vocab):
 
     return model
 
-def train(model, network_input, network_output):
+def train(model, network_input, network_output, epochs):
     """ train the neural network """
     filepath = "weights-improvement-{epoch:02d}-{loss:.4f}-bigger.hdf5"
     checkpoint = ModelCheckpoint(
@@ -120,7 +120,12 @@ def train(model, network_input, network_output):
     )
     callbacks_list = [checkpoint]
 
-    model.fit(network_input, network_output, epochs=400, batch_size=128, callbacks=callbacks_list)
+    model.fit(network_input, network_output, epochs=epochs, batch_size=128, callbacks=callbacks_list)
 
 if __name__ == '__main__':
-    train_network()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("epochs", type=str)
+    
+    args = parser.parse_args()
+    
+    train_network(args.epochs)

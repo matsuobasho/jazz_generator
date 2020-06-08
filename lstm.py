@@ -12,8 +12,9 @@ from keras.layers import Activation
 from keras.layers import BatchNormalization as BatchNorm
 from keras.utils import np_utils
 from keras.callbacks import ModelCheckpoint
+import argparse
 
-def train_network():
+def train_network(epochs):
     """ Train a Neural Network to generate music """
     notes = get_notes()
 

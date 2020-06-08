@@ -125,7 +125,7 @@ def train(model, network_input, network_output, epochs):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("epochs", type=str)
+    parser.add_argument("epochs", type=int)
     
     args = parser.parse_args()
     
